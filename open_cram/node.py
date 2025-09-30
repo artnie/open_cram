@@ -30,10 +30,13 @@ class OpenAIBridgeNode(Node):
         try:
             ai_answer = self.openai.chat(prompt)
             ow_answer = self.openwebui.chat(prompt)
+            # ow_answer = "ow_answer_placeholder"
             merged = f"[openai] {ai_answer}\n[open-webui] {ow_answer}"
             self.pub.publish(String(data=merged))
         except Exception as e:
             self.get_logger().error(f'Error: {e}')
+
+
 
 def main():
     rclpy.init()
