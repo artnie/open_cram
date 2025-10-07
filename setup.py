@@ -20,7 +20,7 @@ setup(
     ],
     zip_safe=True,
     maintainer='Arthur Niedzwiecki',
-    maintainer_email='arthur.niedzwiecki+github@gmail.com',
+    maintainer_email='aniedz@cs.uni-bremen.de',
     description='ROS2 bridge between openAI, open-WebUI and CRAM applications.',
     license='MIT',
     tests_require=['pytest'],
