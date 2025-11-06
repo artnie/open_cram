@@ -37,7 +37,7 @@ TOOLS = [{
     "type": "function",
     "function": {
         "name": "read_files",
-        "description": "Read project files by glob patterns (e.g., 'src/**/*.py', docs/*.md').",
+        "description": "Read project files by directory patters.",
         "parameters": {
             "type": "object",
             "properties": {
@@ -105,7 +105,7 @@ def nl_to_project_code(
             " the raw code segments all together in the 'code' field."
             " Do not put explanations in the 'code' segment.\n\n"
             f"User request:\n{request}\n\n"
-            f"Look into files {doc_globs}\n"
+            f"Look only into the files in {doc_globs}\n"
         )},
     ]
 
