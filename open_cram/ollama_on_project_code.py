@@ -1,46 +1,8 @@
 """
-Module `src/open_cram/open_cram/ollama_on_project_code.py`
-
-Summary
--------
-Convert natural-language requests into structured Python code metadata for this project using an Ollama chat model.
-Implements a tool-calling loop that can read project files, pass context to the model, validate structured JSON output
-against a schema, and return a safe, constrained response suitable for downstream processing.
-
-Main components
----------------
-- Constants:
-  - `DOC_REFERENCE_PATH`: default glob(s) for documentation to include as model context.
-  - `CODE_SCHEMA`: JSON schema that constrains model output (filename, code, optional tests, dependencies, notes).
-  - `SYSTEM_PROMPT`: system-level instructions controlling model behavior and output format.
-  - `TOOLS`: tool descriptors enabling the model to request file reads.
-
-- Functions:
-  - `read_project_files(patterns: List[str], max_chars: int = 20000) -> str`:
-    Read and concatenate snippets from files matching given glob patterns, limited by `max_chars`.
-  - `nl_to_project_code(request: str, model: str = "gpt-oss:20b", doc_globs: List[str] = DOC_REFERENCE_PATH) -> Dict[str, Any]`:
-    Primary entry point. Calls the Ollama client, supports tool calls (file reading), strips Markdown fences,
-    validates model output against `CODE_SCHEMA`, and returns structured JSON or a safe fallback string.
-
-Behavior and error handling
----------------------------
-- Connects to a local Ollama daemon at `http://localhost:11434`; Ollama must be running and accessible.
-- If the model requests tools, the module executes them (file reads) and returns results to the model until a final output is produced.
-- Strips code block fences defensively and validates JSON via `jsonschema`. On parse/validation failures it returns a safe fallback
-  and logs/prints diagnostic messages.
-- Limits how many characters of project files are provided to the model to avoid excessive inputs.
-
-Security and safety notes
--------------------------
-- The model output is constrained by `CODE_SCHEMA` but should not be executed blindly. Review any returned `code` before running.
-- File reading is limited but still exposes workspace snippets to the local model; ensure sensitive files are excluded from `DOC_REFERENCE_PATH`.
-
 Example usage
 -------------
-- `result = nl_to_project_code("Write a new example query based on the findings in the files.")`
-
+`result = nl_to_project_code("Write a new example query based on the findings in the files.")`
 """
-
 
 DOC_REFERENCE_PATH = ["/home/tura/workspace/src/krrood/examples/eql/*.md"]
 
