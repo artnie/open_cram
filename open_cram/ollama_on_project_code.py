@@ -4,7 +4,7 @@ Example usage
 `result = nl_to_project_code("Write a new example query based on the findings in the files.")`
 """
 
-DOC_REFERENCE_PATH = ["/home/tura/workspace/src/krrood/examples/eql/*.md"]
+DOC_REFERENCE_PATH = ["/home/tura/workspace/src/krrood/examples/eql/logical_operators.md"]
 
 CODE_SCHEMA = {
     "type": "object",
